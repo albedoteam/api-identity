@@ -5,10 +5,10 @@ using MediatR;
 
 namespace Identity.Api.Services.UserTypeService.Requests
 {
-    public class Create : IRequest<Result<UserType>>
+    public class Update : IRequest<Result<UserType>>
     {
         public string AccountId { get; set; }
-        public Provider Provider { get; set; }
+        public string Id { get; set; }
         public UsernameFormatType UsernameFormatType { get; set; }
         public string UsernameFormatExpression { get; set; }
     }

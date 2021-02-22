@@ -16,7 +16,7 @@ namespace Identity.Api.Validators.UserValidators
                 .NotEmpty()
                 .Matches("^[0-9a-fA-F]{24}$", RegexOptions.IgnoreCase);
 
-            RuleFor(c => c.LoginPrefix)
+            RuleFor(c => c.Username)
                 .NotEmpty();
 
             RuleFor(c => c.FirstName)

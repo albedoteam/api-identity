@@ -56,6 +56,11 @@ namespace Identity.Api.Controllers
         }
 
         [HttpPost]
+        // [ProducesResponseType(typeof(Group), StatusCodes.Status201Created)]
+        // [ProducesResponseType(typeof(IEnumerable<AlbedoError>), StatusCodes.Status400BadRequest)]
+        // [ProducesResponseType(StatusCodes.Status404NotFound)]
+        // [ProducesResponseType(StatusCodes.Status409Conflict)]
+        // [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Group>> Post(Create request)
         {
             var response = await _mediator.Send(request);
@@ -84,7 +89,7 @@ namespace Identity.Api.Controllers
                 ? HandleError(response)
                 : NoContent();
         }
-        
+
         private ActionResult HandleError<T>(Result<T> response)
         {
             ObjectResult DefaultError()
@@ -103,4 +108,17 @@ namespace Identity.Api.Controllers
             };
         }
     }
+
+    // public enum AlbedoErrorCode
+    // {
+    //     PA001,
+    //     PA002,
+    //     PA003
+    // }
+    //
+    // public struct AlbedoError
+    // {
+    //     public AlbedoErrorCode Code { get; set; }
+    //     public string Message { get; set; }
+    // }
 }

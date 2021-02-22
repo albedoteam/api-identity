@@ -7,7 +7,6 @@ namespace Identity.Api.Services.AuthServerService.Requests
 {
     public class List : IRequest<Result<Paged<AuthServer>>>
     {
-        public string AccountId { get; set; }
         public bool ShowDeleted { get; set; }
         public int Page { get; set; }
         public int PageSize { get; set; }

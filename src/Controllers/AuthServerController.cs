@@ -92,7 +92,7 @@ namespace Identity.Api.Controllers
 
             return Accepted();
         }
-        
+
         private ActionResult HandleError<T>(Result<T> response)
         {
             ObjectResult DefaultError()

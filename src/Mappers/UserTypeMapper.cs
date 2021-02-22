@@ -22,6 +22,7 @@ namespace Identity.Api.Mappers
                 // MediatR to Broker
                 cfg.CreateMap<Create, CreateUserType>().ReverseMap();
                 cfg.CreateMap<Delete, DeleteUserType>().ReverseMap();
+                cfg.CreateMap<Update, UpdateUserType>().ReverseMap();
                 cfg.CreateMap<Get, GetUserType>().ReverseMap();
                 cfg.CreateMap<List, ListUserTypes>().ReverseMap();
             });
@@ -47,6 +48,11 @@ namespace Identity.Api.Mappers
         public DeleteUserType MapRequestToBroker(Delete request)
         {
             return _mapper.Map<Delete, DeleteUserType>(request);
+        }
+
+        public UpdateUserType MapRequestToBroker(Update request)
+        {
+            return _mapper.Map<Update, UpdateUserType>(request);
         }
 
         public GetUserType MapRequestToBroker(Get request)

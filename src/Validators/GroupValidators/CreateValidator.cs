@@ -12,10 +12,13 @@ namespace Identity.Api.Validators.GroupValidators
                 .NotEmpty()
                 .Matches("^[0-9a-fA-F]{24}$", RegexOptions.IgnoreCase);
 
-            RuleFor(c => c.SuffixName)
+            RuleFor(c => c.Name)
                 .NotEmpty();
 
-            RuleFor(c => c.SuffixDescription)
+            RuleFor(c => c.DisplayName)
+                .NotEmpty();
+
+            RuleFor(c => c.Description)
                 .NotEmpty();
         }
     }

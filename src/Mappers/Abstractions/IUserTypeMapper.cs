@@ -15,6 +15,7 @@ namespace Identity.Api.Mappers.Abstractions
         // MediatR to Broker
         CreateUserType MapRequestToBroker(Create request);
         DeleteUserType MapRequestToBroker(Delete request);
+        UpdateUserType MapRequestToBroker(Update request);
         GetUserType MapRequestToBroker(Get request);
         ListUserTypes MapRequestToBroker(List request);
     }

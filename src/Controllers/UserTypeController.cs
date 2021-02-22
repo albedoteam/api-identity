@@ -64,6 +64,18 @@ namespace Identity.Api.Controllers
                 : CreatedAtRoute("GetUserType", new {id = response.Data.Id}, response.Data);
         }
 
+        [HttpPut("{id:regex(^[[0-9a-fA-F]]{{24}}$)}")]
+        public async Task<IActionResult> Put(string id, Update request)
+        {
+            if (id != request.Id)
+                return BadRequest();
+
+            var response = await _mediator.Send(request);
+            return response.HasError
+                ? HandleError(response)
+                : NoContent();
+        }
+
         [HttpDelete("{id:regex(^[[0-9a-fA-F]]{{24}}$)}")]
         public async Task<IActionResult> Delete(string id)
         {
@@ -72,7 +84,7 @@ namespace Identity.Api.Controllers
                 ? HandleError(response)
                 : NoContent();
         }
-        
+
         private ActionResult HandleError<T>(Result<T> response)
         {
             ObjectResult DefaultError()

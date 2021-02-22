@@ -58,7 +58,8 @@ namespace Identity.Api
                         .Add<ListUserTypes>()
                         .Add<GetUserType>()
                         .Add<CreateUserType>()
-                        .Add<DeleteUserType>();
+                        .Add<DeleteUserType>()
+                        .Add<UpdateUserType>();
 
                     // user
                     clients
