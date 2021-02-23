@@ -16,15 +16,18 @@ namespace Identity.Api.Mappers
         {
             var config = new MapperConfiguration(cfg =>
             {
-                // Broker to Model
+                // Broker Responses to Model
                 cfg.CreateMap<Group, GroupResponse>().ReverseMap();
 
-                // MediatR to Broker
+                // MediatR to Broker Requests
                 cfg.CreateMap<Create, CreateGroup>().ReverseMap();
                 cfg.CreateMap<Delete, DeleteGroup>().ReverseMap();
                 cfg.CreateMap<Update, UpdateGroup>().ReverseMap();
                 cfg.CreateMap<Get, GetGroup>().ReverseMap();
                 cfg.CreateMap<List, ListGroups>().ReverseMap();
+
+                // MediatR to Broker Commands
+                // ...
             });
 
             _mapper = config.CreateMapper();

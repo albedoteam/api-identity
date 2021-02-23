@@ -27,5 +27,8 @@ namespace Identity.Api.Mappers.Abstractions
         ChangeUserPassword MapRequestToCommand(ChangePassword request);
         ExpireUserPassword MapRequestToCommand(ExpirePassword request);
         ClearUserSessions MapRequestToCommand(ClearSessions request);
+        AddGroupToUser MapRequestToCommand(AddGroup request);
+        RemoveGroupFromUser MapRequestToCommand(RemoveGroup request);
+        ChangeUserTypeOnUser MapRequestToCommand(ChangeUserType request);
     }
 }

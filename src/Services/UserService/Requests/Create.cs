@@ -8,6 +8,7 @@ namespace Identity.Api.Services.UserService.Requests
     public class Create : IRequest<Result<User>>
     {
         public string AccountId { get; set; }
+        public string UserTypeId { get; set; }
         public string Username { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

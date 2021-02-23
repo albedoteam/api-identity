@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using AlbedoTeam.Identity.Contracts.Commands;
 using AlbedoTeam.Identity.Contracts.Requests;
 using AlbedoTeam.Identity.Contracts.Responses;
 using AutoMapper;
@@ -16,15 +17,19 @@ namespace Identity.Api.Mappers
         {
             var config = new MapperConfiguration(cfg =>
             {
-                // Broker to Model
+                // Broker Responses to Model
                 cfg.CreateMap<UserType, UserTypeResponse>().ReverseMap();
 
-                // MediatR to Broker
+                // MediatR to Broker Requests
                 cfg.CreateMap<Create, CreateUserType>().ReverseMap();
                 cfg.CreateMap<Delete, DeleteUserType>().ReverseMap();
                 cfg.CreateMap<Update, UpdateUserType>().ReverseMap();
                 cfg.CreateMap<Get, GetUserType>().ReverseMap();
                 cfg.CreateMap<List, ListUserTypes>().ReverseMap();
+
+                // MediatR to Broker Commands
+                cfg.CreateMap<AddGroup, AddGroupToUserType>().ReverseMap();
+                cfg.CreateMap<RemoveGroup, RemoveGroupFromUserType>().ReverseMap();
             });
 
             _mapper = config.CreateMapper();
@@ -63,6 +68,16 @@ namespace Identity.Api.Mappers
         public ListUserTypes MapRequestToBroker(List request)
         {
             return _mapper.Map<List, ListUserTypes>(request);
+        }
+
+        public AddGroupToUserType MapRequestToCommand(AddGroup request)
+        {
+            return _mapper.Map<AddGroup, AddGroupToUserType>(request);
+        }
+
+        public RemoveGroupFromUserType MapRequestToCommand(RemoveGroup request)
+        {
+            return _mapper.Map<RemoveGroup, RemoveGroupFromUserType>(request);
         }
     }
 }

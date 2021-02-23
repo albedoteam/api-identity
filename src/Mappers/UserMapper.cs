@@ -17,15 +17,26 @@ namespace Identity.Api.Mappers
         {
             var config = new MapperConfiguration(cfg =>
             {
-                // Broker to Model
+                // Broker Responses to Model
                 cfg.CreateMap<User, UserResponse>().ReverseMap();
 
-                // MediatR to Broker
+                // MediatR to Broker Requests
                 cfg.CreateMap<Create, CreateUser>().ReverseMap();
                 cfg.CreateMap<Delete, DeleteUser>().ReverseMap();
                 cfg.CreateMap<Update, UpdateUser>().ReverseMap();
                 cfg.CreateMap<Get, GetUser>().ReverseMap();
                 cfg.CreateMap<List, ListUsers>().ReverseMap();
+
+                // MediatR to Broker Commands
+                cfg.CreateMap<Activate, ActivateUser>().ReverseMap();
+                cfg.CreateMap<Deactivate, DeactivateUser>().ReverseMap();
+                cfg.CreateMap<SetPassword, SetUserPassword>().ReverseMap();
+                cfg.CreateMap<ChangePassword, ChangeUserPassword>().ReverseMap();
+                cfg.CreateMap<ExpirePassword, ExpireUserPassword>().ReverseMap();
+                cfg.CreateMap<ClearSessions, ClearUserSessions>().ReverseMap();
+                cfg.CreateMap<AddGroup, AddGroupToUser>().ReverseMap();
+                cfg.CreateMap<RemoveGroup, RemoveGroupFromUser>().ReverseMap();
+                cfg.CreateMap<ChangeUserType, ChangeUserTypeOnUser>().ReverseMap();
             });
 
             _mapper = config.CreateMapper();
@@ -94,6 +105,21 @@ namespace Identity.Api.Mappers
         public ClearUserSessions MapRequestToCommand(ClearSessions request)
         {
             return _mapper.Map<ClearSessions, ClearUserSessions>(request);
+        }
+
+        public AddGroupToUser MapRequestToCommand(AddGroup request)
+        {
+            return _mapper.Map<AddGroup, AddGroupToUser>(request);
+        }
+
+        public RemoveGroupFromUser MapRequestToCommand(RemoveGroup request)
+        {
+            return _mapper.Map<RemoveGroup, RemoveGroupFromUser>(request);
+        }
+
+        public ChangeUserTypeOnUser MapRequestToCommand(ChangeUserType request)
+        {
+            return _mapper.Map<ChangeUserType, ChangeUserTypeOnUser>(request);
         }
     }
 }

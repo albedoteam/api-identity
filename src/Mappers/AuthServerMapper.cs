@@ -17,14 +17,18 @@ namespace Identity.Api.Mappers
         {
             var config = new MapperConfiguration(cfg =>
             {
-                // Broker to Model
+                // Broker Responses to Model
                 cfg.CreateMap<AuthServer, AuthServerResponse>().ReverseMap();
 
-                // MediatR to Broker
+                // MediatR to Broker Requests
                 cfg.CreateMap<Create, CreateAuthServer>().ReverseMap();
                 cfg.CreateMap<Delete, DeleteAuthServer>().ReverseMap();
                 cfg.CreateMap<Get, GetAuthServer>().ReverseMap();
                 cfg.CreateMap<List, ListAuthServers>().ReverseMap();
+
+                // MediatR to Broker Commands
+                cfg.CreateMap<Activate, ActivateAuthServer>().ReverseMap();
+                cfg.CreateMap<Deactivate, DeactivateAuthServer>().ReverseMap();
             });
 
             _mapper = config.CreateMapper();

@@ -18,5 +18,8 @@ namespace Identity.Api.Mappers.Abstractions
         UpdateGroup MapRequestToBroker(Update request);
         GetGroup MapRequestToBroker(Get request);
         ListGroups MapRequestToBroker(List request);
+
+        // MediatR to Broker Commands
+        // ...
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using AlbedoTeam.Identity.Contracts.Commands;
 using AlbedoTeam.Identity.Contracts.Requests;
 using AlbedoTeam.Identity.Contracts.Responses;
 using Identity.Api.Models;
@@ -18,5 +19,9 @@ namespace Identity.Api.Mappers.Abstractions
         UpdateUserType MapRequestToBroker(Update request);
         GetUserType MapRequestToBroker(Get request);
         ListUserTypes MapRequestToBroker(List request);
+
+        // MediatR to Broker Commands
+        AddGroupToUserType MapRequestToCommand(AddGroup request);
+        RemoveGroupFromUserType MapRequestToCommand(RemoveGroup request);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using AlbedoTeam.Identity.Contracts.Common;
 
 namespace Identity.Api.Models
@@ -10,6 +11,7 @@ namespace Identity.Api.Models
         public string DisplayName { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public List<string> PredefinedGroups { get; set; }
         public Provider Provider { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }

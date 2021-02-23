@@ -27,6 +27,11 @@ namespace Identity.Api
                         .Map<ActivateAuthServer>()
                         .Map<DeactivateAuthServer>();
 
+                    // userTypes commands
+                    queues
+                        .Map<AddGroupToUserType>()
+                        .Map<RemoveGroupFromUserType>();
+
                     // user commands
                     queues
                         .Map<ActivateUser>()
@@ -34,7 +39,10 @@ namespace Identity.Api
                         .Map<SetUserPassword>()
                         .Map<ChangeUserPassword>()
                         .Map<ExpireUserPassword>()
-                        .Map<ClearUserSessions>();
+                        .Map<ClearUserSessions>()
+                        .Map<AddGroupToUser>()
+                        .Map<RemoveGroupFromUser>()
+                        .Map<ChangeUserTypeOnUser>();
                 },
                 clients =>
                 {

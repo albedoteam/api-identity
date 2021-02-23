@@ -4,28 +4,19 @@ using Identity.Api.Services.UserService.Requests;
 
 namespace Identity.Api.Validators.UserValidators
 {
-    public class CreateValidator : AbstractValidator<Create>
+    public class DeactivateValidator : AbstractValidator<Deactivate>
     {
-        public CreateValidator()
+        public DeactivateValidator()
         {
             RuleFor(c => c.AccountId)
                 .NotEmpty()
                 .Matches("^[0-9a-fA-F]{24}$", RegexOptions.IgnoreCase);
 
-            RuleFor(c => c.UserTypeId)
+            RuleFor(c => c.Id)
                 .NotEmpty()
                 .Matches("^[0-9a-fA-F]{24}$", RegexOptions.IgnoreCase);
 
-            RuleFor(c => c.Username)
-                .NotEmpty();
-
-            RuleFor(c => c.FirstName)
-                .NotEmpty();
-
-            RuleFor(c => c.LastName)
-                .NotEmpty();
-
-            RuleFor(c => c.Email)
+            RuleFor(c => c.Reason)
                 .NotEmpty();
         }
     }
