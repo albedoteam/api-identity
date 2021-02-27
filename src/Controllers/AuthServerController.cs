@@ -37,14 +37,15 @@ namespace Identity.Api.Controllers
                 : Ok(response.Data);
         }
 
-        [HttpGet("{id:regex(^[[0-9a-fA-F]]{{24}}$)}", Name = "GetAuthServer")]
+        [HttpGet("account/{accountId:regex(^[[0-9a-fA-F]]{{24}}$)}/id/{id:regex(^[[0-9a-fA-F]]{{24}}$)}",
+            Name = "GetAuthServer")]
         [ProducesResponseType(typeof(AuthServer), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<AuthServer>> Get(string id, [FromQuery] bool showDeleted)
+        public async Task<ActionResult<AuthServer>> Get(string accountId, string id, [FromQuery] bool showDeleted)
         {
-            var response = await _mediator.Send(new Get {Id = id, ShowDeleted = showDeleted});
+            var response = await _mediator.Send(new Get {AccountId = accountId, Id = id, ShowDeleted = showDeleted});
             return response.HasError
                 ? HandleError(response)
                 : Ok(response.Data);
@@ -61,17 +62,20 @@ namespace Identity.Api.Controllers
             var response = await _mediator.Send(request);
             return response.HasError
                 ? HandleError(response)
-                : CreatedAtRoute("GetAuthServer", new {id = response.Data.Id}, response.Data);
+                : CreatedAtRoute(
+                    "GetAuthServer",
+                    new {accountId = response.Data.AccountId, id = response.Data.Id},
+                    response.Data);
         }
 
-        [HttpDelete("{id:regex(^[[0-9a-fA-F]]{{24}}$)}")]
+        [HttpDelete("account/{accountId:regex(^[[0-9a-fA-F]]{{24}}$)}/id/{id:regex(^[[0-9a-fA-F]]{{24}}$)}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(string accountId, string id)
         {
-            var response = await _mediator.Send(new Delete {Id = id});
+            var response = await _mediator.Send(new Delete {AccountId = accountId, Id = id});
             return response.HasError
                 ? HandleError(response)
                 : NoContent();
