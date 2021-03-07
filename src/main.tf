@@ -1,4 +1,4 @@
-﻿terraform {
+terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
@@ -13,44 +13,69 @@ provider "kubernetes" {
 
 resource "kubernetes_namespace" "identity" {
   metadata {
-    name = "identity-api"
+    name = var.src_name
+  }
+}
+
+resource "kubernetes_secret" "identity" {
+  metadata {
+    name      = var.secret_name
+    namespace = kubernetes_namespace.identity.metadata.0.name
+  }
+  data = {
+    Broker_Host = var.broker_connection_string
   }
 }
 
 resource "kubernetes_deployment" "identity" {
   metadata {
-    name = "identity-api"
+    name      = var.src_name
     namespace = kubernetes_namespace.identity.metadata.0.name
     labels = {
-      app = "IdentityApi"
+      app = var.deployment_label
     }
   }
 
   spec {
-    replicas = 2
+    replicas = var.replicas_count
     selector {
       match_labels = {
-        app = "identity-api"
+        app = var.src_name
       }
     }
     template {
       metadata {
         labels = {
-          app = "identity-api"
+          app = var.src_name
         }
       }
       spec {
         container {
-          image = "identity-api:latest"
-          name = "identity-api-container"
+          image             = "${var.src_name}:latest"
+          name              = "${var.src_name}-container"
           image_pull_policy = "IfNotPresent"
+          resources {
+            limits = {
+              cpu    = "0.5"
+              memory = "512Mi"
+            }
+            requests = {
+              cpu    = "250m"
+              memory = "50Mi"
+            }
+          }
           port {
             container_port = 80
-            protocol = "TCP"
+            protocol       = "TCP"
           }
           env {
-            name = "ASPNETCORE_URLS"
+            name  = "ASPNETCORE_URLS"
             value = "http://+:80"
+          }
+          env_from {
+            secret_ref {
+              name = var.secret_name
+            }
           }
         }
       }
@@ -60,18 +85,18 @@ resource "kubernetes_deployment" "identity" {
 
 resource "kubernetes_service" "identity" {
   metadata {
-    name = "identity-api"
+    name      = var.src_name
     namespace = kubernetes_namespace.identity.metadata.0.name
     labels = {
-      app = "identity-api"
+      app = var.src_name
     }
   }
   spec {
     type = "LoadBalancer"
     port {
-      port = "5000"
+      port        = "5100"
       target_port = "80"
-      protocol = "TCP"
+      protocol    = "TCP"
     }
     selector = {
       app = kubernetes_deployment.identity.spec.0.template.0.metadata.0.labels.app

@@ -1,19 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
-    <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
-        <AssemblyName>Identity.Api</AssemblyName>
-        <RootNamespace>Identity.Api</RootNamespace>
-    </PropertyGroup>
-
-    <ItemGroup>
-      <PackageReference Include="AlbedoTeam.Identity.Contracts" Version="1.0.0-CI-20210222-232333" />
-      <PackageReference Include="AlbedoTeam.Sdk.Documentation" Version="1.0.0-CI-20210221-205220" />
-      <PackageReference Include="AlbedoTeam.Sdk.FailFast" Version="1.0.0-CI-20210221-205418" />
-      <PackageReference Include="AlbedoTeam.Sdk.MessageProducer" Version="1.0.0-CI-20210227-131634" />
-      <PackageReference Include="AlbedoTeam.Sdk.Validations" Version="1.0.0-CI-20210108-191455" />
-      <PackageReference Include="Serilog.AspNetCore" Version="3.4.0" />
-    </ItemGroup>
-
-
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>Identity.Api</AssemblyName>
+    <RootNamespace>Identity.Api</RootNamespace>
+    <UserSecretsId>e21a890c-cffd-4ce4-9122-3d931e15e6a5</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="AlbedoTeam.Identity.Contracts" Version="1.0.0-CI-20210222-232333" />
+    <PackageReference Include="AlbedoTeam.Sdk.Documentation" Version="1.0.0-CI-20210221-205220" />
+    <PackageReference Include="AlbedoTeam.Sdk.FailFast" Version="1.0.0-CI-20210221-205418" />
+    <PackageReference Include="AlbedoTeam.Sdk.MessageProducer" Version="1.0.0-CI-20210227-131634" />
+    <PackageReference Include="AlbedoTeam.Sdk.Validations" Version="1.0.0-CI-20210108-191455" />
+    <PackageReference Include="Serilog.AspNetCore" Version="3.4.0" />
+  </ItemGroup>
 </Project>

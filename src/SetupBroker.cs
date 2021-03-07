@@ -14,7 +14,7 @@ namespace Identity.Api
                 configure =>
                 {
                     configure
-                        .SetBrokerOptions(broker => broker.Host = configuration.GetValue<string>("Broker:Host"));
+                        .SetBrokerOptions(broker => broker.Host = configuration.GetValue<string>("Broker_Host"));
                 },
                 consumers =>
                 {
