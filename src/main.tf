@@ -94,12 +94,41 @@ resource "kubernetes_service" "identity" {
   spec {
     type = "LoadBalancer"
     port {
-      port        = "5100"
+      port        = var.service_port
       target_port = "80"
       protocol    = "TCP"
     }
     selector = {
       app = kubernetes_deployment.identity.spec.0.template.0.metadata.0.labels.app
+    }
+  }
+}
+
+resource "kubernetes_ingress" "identity" {
+  metadata {
+    name      = var.src_name
+    namespace = kubernetes_namespace.identity.metadata.0.name
+    labels = {
+      app = var.src_name
+    }
+  }
+  spec {
+    backend {
+      service_name = var.src_name
+      service_port = var.service_port
+    }
+    rule {
+      host = "${var.environment-prefix}${var.subdomain}.${var.host}"
+      http {
+
+        path {
+          path     = "/"
+          backend {
+            service_name = var.src_name
+            service_port = var.service_port
+          }
+        }
+      }
     }
   }
 }
