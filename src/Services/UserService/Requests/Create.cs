@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using AlbedoTeam.Identity.Contracts.Common;
+using AlbedoTeam.Identity.Contracts.Requests;
 using AlbedoTeam.Sdk.FailFast;
 using Identity.Api.Models;
 using MediatR;
@@ -8,6 +10,7 @@ namespace Identity.Api.Services.UserService.Requests
     public class Create : IRequest<Result<User>>
     {
         public string AccountId { get; set; }
+        public Provider Provider { get; set; }
         public string UserTypeId { get; set; }
         public string Username { get; set; }
         public string FirstName { get; set; }
