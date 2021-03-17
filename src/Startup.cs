@@ -29,7 +29,7 @@ namespace Identity.Api
             services.AddDocumentation(apiDocument =>
             {
                 apiDocument.Title = "Identity Domain API";
-                apiDocument.Description = "codiname: Pandora's Actor";
+                apiDocument.Description = "codiname: Pandora's Actor :)";
                 apiDocument.Contact = new ApiContact
                 {
                     Name = "Albedo Team",
