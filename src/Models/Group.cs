@@ -12,6 +12,7 @@ namespace Identity.Api.Models
         public string Description { get; set; }
         public string IsDefault { get; set; }
         public Provider Provider { get; set; }
+        public string ProviderId { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public bool IsDeleted { get; set; }

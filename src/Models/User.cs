@@ -17,6 +17,7 @@ namespace Identity.Api.Models
         public Dictionary<string, string> CustomProfileFields { get; set; }
         public List<string> Groups { get; set; }
         public Provider Provider { get; set; }
+        public string ProviderId { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public bool IsDeleted { get; set; }

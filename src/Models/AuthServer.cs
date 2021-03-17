@@ -18,6 +18,7 @@ namespace Identity.Api.Models
         public List<string> BasicScopes { get; set; }
         public bool Active { get; set; }
         public Provider Provider { get; set; }
+        public string ProviderId { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public bool IsDeleted { get; set; }
