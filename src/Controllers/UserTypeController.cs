@@ -41,9 +41,10 @@ namespace Identity.Api.Controllers
         [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<UserType>> Get(string id, [FromQuery] bool showDeleted)
+        public async Task<ActionResult<UserType>> Get(string id, [FromQuery] string accountId,
+            [FromQuery] bool showDeleted)
         {
-            var response = await _mediator.Send(new Get {Id = id, ShowDeleted = showDeleted});
+            var response = await _mediator.Send(new Get {Id = id, AccountId = accountId, ShowDeleted = showDeleted});
             return response.HasError
                 ? HandleError(response)
                 : Ok(response.Data);
@@ -84,9 +85,9 @@ namespace Identity.Api.Controllers
         [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(string id, [FromQuery] string accountId)
         {
-            var response = await _mediator.Send(new Delete {Id = id});
+            var response = await _mediator.Send(new Delete {Id = id, AccountId = accountId});
             return response.HasError
                 ? HandleError(response)
                 : NoContent();
@@ -110,7 +111,7 @@ namespace Identity.Api.Controllers
             return Accepted();
         }
 
-        [HttpDelete("{id:regex(^[[0-9a-fA-F]]{{24}}$)}/removeGroup")]
+        [HttpPatch("{id:regex(^[[0-9a-fA-F]]{{24}}$)}/removeGroup")]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status404NotFound)]

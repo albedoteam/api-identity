@@ -37,13 +37,15 @@ namespace Identity.Api.Controllers
                 : Ok(response.Data);
         }
 
-        [HttpGet("account/{accountId:regex(^[[0-9a-fA-F]]{{24}}$)}/id/{id:regex(^[[0-9a-fA-F]]{{24}}$)}",
-            Name = "GetAuthServer")]
+        [HttpGet("{id:regex(^[[0-9a-fA-F]]{{24}}$)}", Name = "GetAuthServer")]
         [ProducesResponseType(typeof(AuthServer), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<AuthServer>> Get(string accountId, string id, [FromQuery] bool showDeleted)
+        public async Task<ActionResult<AuthServer>> Get(
+            string id,
+            [FromQuery] string accountId,
+            [FromQuery] bool showDeleted)
         {
             var response = await _mediator.Send(new Get {AccountId = accountId, Id = id, ShowDeleted = showDeleted});
             return response.HasError
@@ -68,12 +70,12 @@ namespace Identity.Api.Controllers
                     response.Data);
         }
 
-        [HttpDelete("account/{accountId:regex(^[[0-9a-fA-F]]{{24}}$)}/id/{id:regex(^[[0-9a-fA-F]]{{24}}$)}")]
+        [HttpDelete("{id:regex(^[[0-9a-fA-F]]{{24}}$)}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Delete(string accountId, string id)
+        public async Task<IActionResult> Delete([FromRoute] string id, [FromQuery] string accountId)
         {
             var response = await _mediator.Send(new Delete {AccountId = accountId, Id = id});
             return response.HasError
