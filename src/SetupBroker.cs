@@ -51,6 +51,7 @@ namespace Identity.Api
                         .Add<ListAuthServers>()
                         .Add<GetAuthServer>()
                         .Add<CreateAuthServer>()
+                        .Add<UpdateAuthServer>()
                         .Add<DeleteAuthServer>();
 
                     // group

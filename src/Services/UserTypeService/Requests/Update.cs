@@ -1,6 +1,4 @@
-﻿using AlbedoTeam.Identity.Contracts.Common;
-using AlbedoTeam.Identity.Contracts.Requests;
-using AlbedoTeam.Sdk.FailFast;
+﻿using AlbedoTeam.Sdk.FailFast;
 using Identity.Api.Models;
 using MediatR;
 

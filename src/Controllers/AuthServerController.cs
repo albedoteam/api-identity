@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AlbedoTeam.Sdk.FailFast;
 using Identity.Api.Models;
 using Identity.Api.Services.AuthServerService.Requests;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 
@@ -24,10 +22,6 @@ namespace Identity.Api.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(Paged<AuthServer>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Paged<AuthServer>>> List([FromQuery] List request)
         {
             var response = await _mediator.Send(request);
@@ -38,10 +32,6 @@ namespace Identity.Api.Controllers
         }
 
         [HttpGet("{id:regex(^[[0-9a-fA-F]]{{24}}$)}", Name = "GetAuthServer")]
-        [ProducesResponseType(typeof(AuthServer), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<AuthServer>> Get(
             string id,
             [FromQuery] string accountId,
@@ -54,11 +44,6 @@ namespace Identity.Api.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(AuthServer), StatusCodes.Status201Created)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status409Conflict)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<AuthServer>> Post(Create request)
         {
             var response = await _mediator.Send(request);
@@ -70,11 +55,19 @@ namespace Identity.Api.Controllers
                     response.Data);
         }
 
+        [HttpPut("{id:regex(^[[0-9a-fA-F]]{{24}}$)}")]
+        public async Task<IActionResult> Put(string id, Update request)
+        {
+            if (id != request.Id)
+                return BadRequest();
+
+            var response = await _mediator.Send(request);
+            return response.HasError
+                ? HandleError(response)
+                : NoContent();
+        }
+
         [HttpDelete("{id:regex(^[[0-9a-fA-F]]{{24}}$)}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Delete([FromRoute] string id, [FromQuery] string accountId)
         {
             var response = await _mediator.Send(new Delete {AccountId = accountId, Id = id});
@@ -84,10 +77,6 @@ namespace Identity.Api.Controllers
         }
 
         [HttpPatch("{id:regex(^[[0-9a-fA-F]]{{24}}$)}/activate")]
-        [ProducesResponseType(StatusCodes.Status202Accepted)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Activate(string id, Activate request)
         {
             if (id != request.Id)
@@ -102,10 +91,6 @@ namespace Identity.Api.Controllers
         }
 
         [HttpPatch("{id:regex(^[[0-9a-fA-F]]{{24}}$)}/deactivate")]
-        [ProducesResponseType(StatusCodes.Status202Accepted)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Deactivate(string id, Deactivate request)
         {
             if (id != request.Id)

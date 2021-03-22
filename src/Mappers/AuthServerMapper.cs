@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using AlbedoTeam.Identity.Contracts.Commands;
+using AlbedoTeam.Identity.Contracts.Common;
 using AlbedoTeam.Identity.Contracts.Requests;
 using AlbedoTeam.Identity.Contracts.Responses;
 using AutoMapper;
@@ -19,10 +20,13 @@ namespace Identity.Api.Mappers
             {
                 // Broker Responses to Model
                 cfg.CreateMap<AuthServer, AuthServerResponse>().ReverseMap();
+                cfg.CreateMap<CommunicationRules, ICommunicationRules>().ReverseMap();
+                cfg.CreateMap<CommunicationRule, ICommunicationRule>().ReverseMap();
 
                 // MediatR to Broker Requests
                 cfg.CreateMap<Create, CreateAuthServer>().ReverseMap();
                 cfg.CreateMap<Delete, DeleteAuthServer>().ReverseMap();
+                cfg.CreateMap<Update, UpdateAuthServer>().ReverseMap();
                 cfg.CreateMap<Get, GetAuthServer>().ReverseMap();
                 cfg.CreateMap<List, ListAuthServers>().ReverseMap();
 
@@ -62,6 +66,11 @@ namespace Identity.Api.Mappers
         public ListAuthServers MapRequestToBroker(List request)
         {
             return _mapper.Map<List, ListAuthServers>(request);
+        }
+
+        public UpdateAuthServer MapRequestToBroker(Update request)
+        {
+            return _mapper.Map<Update, UpdateAuthServer>(request);
         }
 
         public ActivateAuthServer MapRequestToCommand(Activate request)

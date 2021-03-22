@@ -18,6 +18,7 @@ namespace Identity.Api.Mappers.Abstractions
         DeleteAuthServer MapRequestToBroker(Delete request);
         GetAuthServer MapRequestToBroker(Get request);
         ListAuthServers MapRequestToBroker(List request);
+        UpdateAuthServer MapRequestToBroker(Update request);
 
         // MediatR to Broker Commands
         ActivateAuthServer MapRequestToCommand(Activate request);

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using AlbedoTeam.Identity.Contracts.Common;
-using AlbedoTeam.Identity.Contracts.Responses;
 
 namespace Identity.Api.Models
 {

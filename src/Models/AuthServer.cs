@@ -19,6 +19,7 @@ namespace Identity.Api.Models
         public bool Active { get; set; }
         public Provider Provider { get; set; }
         public string ProviderId { get; set; }
+        public CommunicationRules CommunicationRules { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public bool IsDeleted { get; set; }

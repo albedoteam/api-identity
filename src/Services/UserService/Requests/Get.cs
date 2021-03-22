@@ -1,7 +1,6 @@
 ﻿using AlbedoTeam.Sdk.FailFast;
 using Identity.Api.Models;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Identity.Api.Services.UserService.Requests
 {
