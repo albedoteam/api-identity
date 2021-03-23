@@ -9,20 +9,20 @@ using Identity.Api.Services.PasswordRecoveryService.Requests;
 
 namespace Identity.Api.Services.PasswordRecoveryService.Handlers
 {
-    public class RequestHandler: CommandHandler<Request, PasswordRecovery>
+    public class CreateHandler: CommandHandler<Create, PasswordRecovery>
     {
         private readonly IPasswordRecoveryMapper _mapper;
         private readonly IProducerService _producer;
 
-        public RequestHandler(IPasswordRecoveryMapper mapper, IProducerService producer)
+        public CreateHandler(IPasswordRecoveryMapper mapper, IProducerService producer)
         {
             _mapper = mapper;
             _producer = producer;
         }
 
-        protected override async Task<Result<PasswordRecovery>> Handle(Request request)
+        protected override async Task<Result<PasswordRecovery>> Handle(Create create)
         {
-            await _producer.Send<RequestPasswordChange>(_mapper.MapRequestToCommand(request));
+            await _producer.Send<CreatePasswordRecovery>(_mapper.MapRequestToCommand(create));
             return new Result<PasswordRecovery>();
         }
     }

@@ -31,9 +31,9 @@ namespace Identity.Api.Controllers
         }
         
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Request request)
+        public async Task<IActionResult> Post([FromBody] Create create)
         {
-            var response = await _mediator.Send(request);
+            var response = await _mediator.Send(create);
             return response.HasError
                 ? HandleError(response)
                 : NoContent();

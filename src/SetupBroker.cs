@@ -46,7 +46,7 @@ namespace Identity.Api
 
                     // pwd recovery commands
                     queues
-                        .Map<RequestPasswordChange>();
+                        .Map<CreatePasswordRecovery>();
                 },
                 clients =>
                 {

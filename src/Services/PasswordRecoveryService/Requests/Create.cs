@@ -4,9 +4,9 @@ using MediatR;
 
 namespace Identity.Api.Services.PasswordRecoveryService.Requests
 {
-    public class Request: IRequest<Result<PasswordRecovery>>
+    public class Create: IRequest<Result<PasswordRecovery>>
     {
         public string AccountId { get; set; }
-        public string Id { get; set; }
+        public string UserEmail { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace Identity.Api.Mappers
                 cfg.CreateMap<Get, GetPasswordRecovery>().ReverseMap();
 
                 // MediatR to Broker Commands
-                cfg.CreateMap<Request, RequestPasswordChange>().ReverseMap();
+                cfg.CreateMap<Create, CreatePasswordRecovery>().ReverseMap();
             });
 
             _mapper = config.CreateMapper();
@@ -39,9 +39,9 @@ namespace Identity.Api.Mappers
             return _mapper.Map<Get, GetPasswordRecovery>(request);
         }
 
-        public RequestPasswordChange MapRequestToCommand(Request request)
+        public CreatePasswordRecovery MapRequestToCommand(Create create)
         {
-            return _mapper.Map<Request, RequestPasswordChange>(request);
+            return _mapper.Map<Create, CreatePasswordRecovery>(create);
         }
     }
 }

@@ -13,6 +13,6 @@ namespace Identity.Api.Mappers.Abstractions
         
         // MediatR to Broker 
         GetPasswordRecovery MapRequestToBroker(Get request);
-        RequestPasswordChange MapRequestToCommand(Request request);
+        CreatePasswordRecovery MapRequestToCommand(Create create);
     }
 }
