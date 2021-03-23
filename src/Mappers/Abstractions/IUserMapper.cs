@@ -4,6 +4,7 @@ using AlbedoTeam.Identity.Contracts.Requests;
 using AlbedoTeam.Identity.Contracts.Responses;
 using Identity.Api.Models;
 using Identity.Api.Services.UserService.Requests;
+using Get = Identity.Api.Services.UserService.Requests.Get;
 
 namespace Identity.Api.Mappers.Abstractions
 {

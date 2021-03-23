@@ -43,6 +43,10 @@ namespace Identity.Api
                         .Map<AddGroupToUser>()
                         .Map<RemoveGroupFromUser>()
                         .Map<ChangeUserTypeOnUser>();
+
+                    // pwd recovery commands
+                    queues
+                        .Map<RequestPasswordChange>();
                 },
                 clients =>
                 {
@@ -77,6 +81,10 @@ namespace Identity.Api
                         .Add<CreateUser>()
                         .Add<UpdateUser>()
                         .Add<DeleteUser>();
+
+                    // pwd recovery
+                    clients
+                        .Add<GetPasswordRecovery>();
                 });
 
             return services;

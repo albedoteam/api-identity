@@ -11,6 +11,7 @@ namespace Identity.Api.Mappers
             services.AddTransient<IGroupMapper, GroupMapper>();
             services.AddTransient<IUserTypeMapper, UserTypeMapper>();
             services.AddTransient<IUserMapper, UserMapper>();
+            services.AddTransient<IPasswordRecoveryMapper, PasswordRecoveryMapper>();
 
             return services;
         }
