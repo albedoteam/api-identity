@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Identity.Api.Models
+﻿namespace Identity.Api.Models
 {
+    using System.Collections.Generic;
+
     public class CommunicationRule
     {
         public string TemplateId { get; set; }

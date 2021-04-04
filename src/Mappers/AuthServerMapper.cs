@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
-using AlbedoTeam.Identity.Contracts.Commands;
-using AlbedoTeam.Identity.Contracts.Common;
-using AlbedoTeam.Identity.Contracts.Requests;
-using AlbedoTeam.Identity.Contracts.Responses;
-using AutoMapper;
-using Identity.Api.Mappers.Abstractions;
-using Identity.Api.Models;
-using Identity.Api.Services.AuthServerService.Requests;
-
-namespace Identity.Api.Mappers
+﻿namespace Identity.Api.Mappers
 {
+    using System.Collections.Generic;
+    using Abstractions;
+    using AlbedoTeam.Identity.Contracts.Commands;
+    using AlbedoTeam.Identity.Contracts.Common;
+    using AlbedoTeam.Identity.Contracts.Requests;
+    using AlbedoTeam.Identity.Contracts.Responses;
+    using AutoMapper;
+    using Models;
+    using Services.AuthServerService.Requests;
+
     public class AuthServerMapper : IAuthServerMapper
     {
         private readonly IMapper _mapper;

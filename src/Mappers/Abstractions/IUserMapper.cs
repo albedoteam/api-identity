@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
-using AlbedoTeam.Identity.Contracts.Commands;
-using AlbedoTeam.Identity.Contracts.Requests;
-using AlbedoTeam.Identity.Contracts.Responses;
-using Identity.Api.Models;
-using Identity.Api.Services.UserService.Requests;
-using Get = Identity.Api.Services.UserService.Requests.Get;
-
-namespace Identity.Api.Mappers.Abstractions
+﻿namespace Identity.Api.Mappers.Abstractions
 {
+    using System.Collections.Generic;
+    using AlbedoTeam.Identity.Contracts.Commands;
+    using AlbedoTeam.Identity.Contracts.Requests;
+    using AlbedoTeam.Identity.Contracts.Responses;
+    using Models;
+    using Services.UserService.Requests;
+
     public interface IUserMapper
     {
         // Broker to Model

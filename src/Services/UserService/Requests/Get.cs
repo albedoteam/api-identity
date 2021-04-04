@@ -1,9 +1,9 @@
-﻿using AlbedoTeam.Sdk.FailFast;
-using Identity.Api.Models;
-using MediatR;
-
-namespace Identity.Api.Services.UserService.Requests
+﻿namespace Identity.Api.Services.UserService.Requests
 {
+    using AlbedoTeam.Sdk.FailFast;
+    using MediatR;
+    using Models;
+
     public class Get : IRequest<Result<User>>
     {
         public string Id { get; set; }

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using AlbedoTeam.Identity.Contracts.Common;
-
-namespace Identity.Api.Models
+﻿namespace Identity.Api.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using AlbedoTeam.Identity.Contracts.Common;
+
     public class UserType
     {
         public string Id { get; set; }

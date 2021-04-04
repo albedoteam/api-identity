@@ -1,14 +1,14 @@
-﻿using System.Threading.Tasks;
-using AlbedoTeam.Identity.Contracts.Commands;
-using AlbedoTeam.Sdk.FailFast;
-using AlbedoTeam.Sdk.FailFast.Abstractions;
-using AlbedoTeam.Sdk.MessageProducer.Services.Abstractions;
-using Identity.Api.Mappers.Abstractions;
-using Identity.Api.Models;
-using Identity.Api.Services.UserTypeService.Requests;
-
-namespace Identity.Api.Services.UserTypeService.Handlers
+﻿namespace Identity.Api.Services.UserTypeService.Handlers
 {
+    using System.Threading.Tasks;
+    using AlbedoTeam.Identity.Contracts.Commands;
+    using AlbedoTeam.Sdk.FailFast;
+    using AlbedoTeam.Sdk.FailFast.Abstractions;
+    using AlbedoTeam.Sdk.MessageProducer.Services.Abstractions;
+    using Mappers.Abstractions;
+    using Models;
+    using Requests;
+
     public class AddGroupHandler : CommandHandler<AddGroup, UserType>
     {
         private readonly IUserTypeMapper _mapper;

@@ -1,13 +1,13 @@
-﻿using System.Threading.Tasks;
-using AlbedoTeam.Sdk.FailFast;
-using Identity.Api.Models;
-using Identity.Api.Services.PasswordRecoveryService.Requests;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using NSwag.Annotations;
-
-namespace Identity.Api.Controllers
+﻿namespace Identity.Api.Controllers
 {
+    using System.Threading.Tasks;
+    using AlbedoTeam.Sdk.FailFast;
+    using MediatR;
+    using Microsoft.AspNetCore.Mvc;
+    using Models;
+    using NSwag.Annotations;
+    using Services.PasswordRecoveryService.Requests;
+
     [ApiController]
     [Route("v{version:apiVersion}/[controller]")]
     [ApiVersion("1")]
@@ -20,7 +20,7 @@ namespace Identity.Api.Controllers
         {
             _mediator = mediator;
         }
-        
+
         [HttpGet]
         public async Task<ActionResult<PasswordRecovery>> Get([FromQuery] Get request)
         {
@@ -29,7 +29,7 @@ namespace Identity.Api.Controllers
                 ? HandleError(response)
                 : Ok(response.Data);
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Create create)
         {
@@ -38,7 +38,7 @@ namespace Identity.Api.Controllers
                 ? HandleError(response)
                 : NoContent();
         }
-        
+
         private ActionResult HandleError<T>(Result<T> response)
         {
             ObjectResult DefaultError()

@@ -1,19 +1,19 @@
-using System.Text.Json.Serialization;
-using AlbedoTeam.Sdk.Documentation;
-using AlbedoTeam.Sdk.Documentation.Models;
-using AlbedoTeam.Sdk.ExceptionHandler;
-using AlbedoTeam.Sdk.FailFast;
-using AlbedoTeam.Sdk.Validations;
-using Identity.Api.Mappers;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-
 namespace Identity.Api
 {
+    using System.Text.Json.Serialization;
+    using AlbedoTeam.Sdk.Documentation;
+    using AlbedoTeam.Sdk.Documentation.Models;
+    using AlbedoTeam.Sdk.ExceptionHandler;
+    using AlbedoTeam.Sdk.FailFast;
+    using AlbedoTeam.Sdk.Validations;
+    using Mappers;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+    using Microsoft.Extensions.Logging;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)

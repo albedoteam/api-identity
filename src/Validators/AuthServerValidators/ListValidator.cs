@@ -1,8 +1,8 @@
-﻿using FluentValidation;
-using Identity.Api.Services.AuthServerService.Requests;
-
-namespace Identity.Api.Validators.AuthServerValidators
+﻿namespace Identity.Api.Validators.AuthServerValidators
 {
+    using FluentValidation;
+    using Services.AuthServerService.Requests;
+
     public class ListValidator : AbstractValidator<List>
     {
         public ListValidator()

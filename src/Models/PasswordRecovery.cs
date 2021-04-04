@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Identity.Api.Models
+﻿namespace Identity.Api.Models
 {
+    using System;
+
     public class PasswordRecovery
     {
         public string Id { get; set; }

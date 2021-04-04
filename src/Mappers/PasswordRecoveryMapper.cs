@@ -1,14 +1,14 @@
-﻿using AlbedoTeam.Identity.Contracts.Commands;
-using AlbedoTeam.Identity.Contracts.Requests;
-using AlbedoTeam.Identity.Contracts.Responses;
-using AutoMapper;
-using Identity.Api.Mappers.Abstractions;
-using Identity.Api.Models;
-using Identity.Api.Services.PasswordRecoveryService.Requests;
-
-namespace Identity.Api.Mappers
+﻿namespace Identity.Api.Mappers
 {
-    public class PasswordRecoveryMapper: IPasswordRecoveryMapper
+    using Abstractions;
+    using AlbedoTeam.Identity.Contracts.Commands;
+    using AlbedoTeam.Identity.Contracts.Requests;
+    using AlbedoTeam.Identity.Contracts.Responses;
+    using AutoMapper;
+    using Models;
+    using Services.PasswordRecoveryService.Requests;
+
+    public class PasswordRecoveryMapper : IPasswordRecoveryMapper
     {
         private readonly IMapper _mapper;
 
@@ -28,7 +28,7 @@ namespace Identity.Api.Mappers
 
             _mapper = config.CreateMapper();
         }
-        
+
         public PasswordRecovery MapResponseToModel(PasswordRecoveryResponse response)
         {
             return _mapper.Map<PasswordRecoveryResponse, PasswordRecovery>(response);

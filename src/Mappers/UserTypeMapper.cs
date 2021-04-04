@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
-using AlbedoTeam.Identity.Contracts.Commands;
-using AlbedoTeam.Identity.Contracts.Requests;
-using AlbedoTeam.Identity.Contracts.Responses;
-using AutoMapper;
-using Identity.Api.Mappers.Abstractions;
-using Identity.Api.Models;
-using Identity.Api.Services.UserTypeService.Requests;
-
-namespace Identity.Api.Mappers
+﻿namespace Identity.Api.Mappers
 {
+    using System.Collections.Generic;
+    using Abstractions;
+    using AlbedoTeam.Identity.Contracts.Commands;
+    using AlbedoTeam.Identity.Contracts.Requests;
+    using AlbedoTeam.Identity.Contracts.Responses;
+    using AutoMapper;
+    using Models;
+    using Services.UserTypeService.Requests;
+
     public class UserTypeMapper : IUserTypeMapper
     {
         private readonly IMapper _mapper;

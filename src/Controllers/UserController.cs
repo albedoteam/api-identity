@@ -1,13 +1,13 @@
-﻿using System.Threading.Tasks;
-using AlbedoTeam.Sdk.FailFast;
-using Identity.Api.Models;
-using Identity.Api.Services.UserService.Requests;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using NSwag.Annotations;
-
-namespace Identity.Api.Controllers
+﻿namespace Identity.Api.Controllers
 {
+    using System.Threading.Tasks;
+    using AlbedoTeam.Sdk.FailFast;
+    using MediatR;
+    using Microsoft.AspNetCore.Mvc;
+    using Models;
+    using NSwag.Annotations;
+    using Services.UserService.Requests;
+
     [ApiController]
     [Route("v{version:apiVersion}/[controller]")]
     [ApiVersion("1")]

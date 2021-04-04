@@ -1,17 +1,17 @@
-﻿using System.Threading.Tasks;
-using AlbedoTeam.Identity.Contracts.Requests;
-using AlbedoTeam.Identity.Contracts.Responses;
-using AlbedoTeam.Sdk.FailFast;
-using AlbedoTeam.Sdk.FailFast.Abstractions;
-using Identity.Api.Extensions;
-using Identity.Api.Mappers.Abstractions;
-using Identity.Api.Models;
-using Identity.Api.Services.PasswordRecoveryService.Requests;
-using MassTransit;
-
-namespace Identity.Api.Services.PasswordRecoveryService.Handlers
+﻿namespace Identity.Api.Services.PasswordRecoveryService.Handlers
 {
-    public class GetHandler: QueryHandler<Get, PasswordRecovery>
+    using System.Threading.Tasks;
+    using AlbedoTeam.Identity.Contracts.Requests;
+    using AlbedoTeam.Identity.Contracts.Responses;
+    using AlbedoTeam.Sdk.FailFast;
+    using AlbedoTeam.Sdk.FailFast.Abstractions;
+    using Extensions;
+    using Mappers.Abstractions;
+    using MassTransit;
+    using Models;
+    using Requests;
+
+    public class GetHandler : QueryHandler<Get, PasswordRecovery>
     {
         private readonly IRequestClient<GetPasswordRecovery> _client;
         private readonly IPasswordRecoveryMapper _mapper;

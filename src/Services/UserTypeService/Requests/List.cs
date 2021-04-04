@@ -1,10 +1,10 @@
-﻿using AlbedoTeam.Identity.Contracts.Common;
-using AlbedoTeam.Sdk.FailFast;
-using Identity.Api.Models;
-using MediatR;
-
-namespace Identity.Api.Services.UserTypeService.Requests
+﻿namespace Identity.Api.Services.UserTypeService.Requests
 {
+    using AlbedoTeam.Identity.Contracts.Common;
+    using AlbedoTeam.Sdk.FailFast;
+    using MediatR;
+    using Models;
+
     public class List : IRequest<Result<Paged<UserType>>>
     {
         public string AccountId { get; set; }

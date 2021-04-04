@@ -1,9 +1,9 @@
-﻿using AlbedoTeam.Sdk.FailFast;
-using Identity.Api.Models;
-using MediatR;
-
-namespace Identity.Api.Services.AuthServerService.Requests
+﻿namespace Identity.Api.Services.AuthServerService.Requests
 {
+    using AlbedoTeam.Sdk.FailFast;
+    using MediatR;
+    using Models;
+
     public class Update : IRequest<Result<AuthServer>>
     {
         public string AccountId { get; set; }

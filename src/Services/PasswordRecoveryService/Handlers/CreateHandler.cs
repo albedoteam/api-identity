@@ -1,15 +1,15 @@
-﻿using System.Threading.Tasks;
-using AlbedoTeam.Identity.Contracts.Commands;
-using AlbedoTeam.Sdk.FailFast;
-using AlbedoTeam.Sdk.FailFast.Abstractions;
-using AlbedoTeam.Sdk.MessageProducer.Services.Abstractions;
-using Identity.Api.Mappers.Abstractions;
-using Identity.Api.Models;
-using Identity.Api.Services.PasswordRecoveryService.Requests;
-
-namespace Identity.Api.Services.PasswordRecoveryService.Handlers
+﻿namespace Identity.Api.Services.PasswordRecoveryService.Handlers
 {
-    public class CreateHandler: CommandHandler<Create, PasswordRecovery>
+    using System.Threading.Tasks;
+    using AlbedoTeam.Identity.Contracts.Commands;
+    using AlbedoTeam.Sdk.FailFast;
+    using AlbedoTeam.Sdk.FailFast.Abstractions;
+    using AlbedoTeam.Sdk.MessageProducer.Services.Abstractions;
+    using Mappers.Abstractions;
+    using Models;
+    using Requests;
+
+    public class CreateHandler : CommandHandler<Create, PasswordRecovery>
     {
         private readonly IPasswordRecoveryMapper _mapper;
         private readonly IProducerService _producer;

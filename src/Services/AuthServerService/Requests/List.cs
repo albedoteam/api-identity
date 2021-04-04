@@ -1,10 +1,10 @@
-﻿using AlbedoTeam.Identity.Contracts.Common;
-using AlbedoTeam.Sdk.FailFast;
-using Identity.Api.Models;
-using MediatR;
-
-namespace Identity.Api.Services.AuthServerService.Requests
+﻿namespace Identity.Api.Services.AuthServerService.Requests
 {
+    using AlbedoTeam.Identity.Contracts.Common;
+    using AlbedoTeam.Sdk.FailFast;
+    using MediatR;
+    using Models;
+
     public class List : IRequest<Result<Paged<AuthServer>>>
     {
         public bool ShowDeleted { get; set; }

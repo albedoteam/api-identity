@@ -10,7 +10,7 @@
     <PackageReference Include="AlbedoTeam.Identity.Contracts" Version="1.0.0-CI-20210323-153245" />
     <PackageReference Include="AlbedoTeam.Sdk.Documentation" Version="1.0.0-CI-20210221-205220" />
     <PackageReference Include="AlbedoTeam.Sdk.FailFast" Version="1.0.0-CI-20210221-205418" />
-    <PackageReference Include="AlbedoTeam.Sdk.MessageProducer" Version="1.0.0-CI-20210227-131634" />
+    <PackageReference Include="AlbedoTeam.Sdk.MessageProducer" Version="1.0.0-CI-20210404-152045" />
     <PackageReference Include="AlbedoTeam.Sdk.Validations" Version="1.0.0-CI-20210108-191455" />
     <PackageReference Include="Serilog.AspNetCore" Version="3.4.0" />
   </ItemGroup>
