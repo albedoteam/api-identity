@@ -30,5 +30,6 @@
         AddGroupToUser MapRequestToCommand(AddGroup request);
         RemoveGroupFromUser MapRequestToCommand(RemoveGroup request);
         ChangeUserTypeOnUser MapRequestToCommand(ChangeUserType request);
+        ResendFirstAccessEmail MapRequestToCommand(ResendInvite request);
     }
 }

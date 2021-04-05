@@ -60,7 +60,8 @@
                         .Map<ClearUserSessions>()
                         .Map<AddGroupToUser>()
                         .Map<RemoveGroupFromUser>()
-                        .Map<ChangeUserTypeOnUser>();
+                        .Map<ChangeUserTypeOnUser>()
+                        .Map<ResendFirstAccessEmail>();
 
                     // pwd recovery commands
                     queues

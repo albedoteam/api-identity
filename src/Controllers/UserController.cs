@@ -187,6 +187,19 @@
             return Accepted();
         }
 
+        [HttpPatch("{id:regex(^[[0-9a-fA-F]]{{24}}$)}/resendInvite")]
+        public async Task<IActionResult> ResendInvite(string id, ResendInvite request)
+        {
+            if (id != request.UserId)
+                return BadRequest();
+
+            var response = await _mediator.Send(request);
+            if (response.HasError)
+                return BadRequest(response.Errors);
+
+            return Accepted();
+        }
+
         private ActionResult HandleError<T>(Result<T> response)
         {
             ObjectResult DefaultError()

@@ -37,6 +37,7 @@
                 cfg.CreateMap<AddGroup, AddGroupToUser>().ReverseMap();
                 cfg.CreateMap<RemoveGroup, RemoveGroupFromUser>().ReverseMap();
                 cfg.CreateMap<ChangeUserType, ChangeUserTypeOnUser>().ReverseMap();
+                cfg.CreateMap<ResendInvite, ResendFirstAccessEmail>().ReverseMap();
             });
 
             _mapper = config.CreateMapper();
@@ -120,6 +121,11 @@
         public ChangeUserTypeOnUser MapRequestToCommand(ChangeUserType request)
         {
             return _mapper.Map<ChangeUserType, ChangeUserTypeOnUser>(request);
+        }
+
+        public ResendFirstAccessEmail MapRequestToCommand(ResendInvite request)
+        {
+            return _mapper.Map<ResendInvite, ResendFirstAccessEmail>(request);
         }
     }
 }
