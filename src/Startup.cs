@@ -88,9 +88,8 @@ namespace Identity.Api
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseGlobalExceptionHandler(loggerFactory);
-            app.UseCors(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseDocumentation();
-            app.UseAuthorization();
+            app.UseAuth();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
