@@ -1,9 +1,11 @@
 ﻿namespace Identity.Api.Services.UserTypeService.Requests
 {
+    using AlbedoTeam.Sdk.Cache.Attributes;
     using AlbedoTeam.Sdk.FailFast;
     using MediatR;
     using Models;
 
+    [Cache(120)]
     public class Get : IRequest<Result<UserType>>
     {
         public string AccountId { get; set; }

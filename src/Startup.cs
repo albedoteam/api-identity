@@ -1,6 +1,9 @@
 namespace Identity.Api
 {
+    using System.Linq;
     using System.Text.Json.Serialization;
+    using AlbedoTeam.Sdk.Authentication;
+    using AlbedoTeam.Sdk.Cache;
     using AlbedoTeam.Sdk.Documentation;
     using AlbedoTeam.Sdk.Documentation.Models;
     using AlbedoTeam.Sdk.ExceptionHandler;
@@ -43,11 +46,31 @@ namespace Identity.Api
             });
 
             services.ConfigureBroker(Configuration);
+            
+            services.AddCache(configure => configure.SetOptions(options =>
+            {
+                options.Host = Configuration.GetValue<string>("Cache_Host");
+                options.Port = Configuration.GetValue<int>("Cache_Port");
+                options.Password = Configuration.GetValue<string>("Cache_Secret");
+                options.InstanceName = Configuration.GetValue<string>("Cache_InstanceName");
+            }));
+            
             services.AddMappers();
             services.AddValidators(GetType().Assembly.FullName);
             services.AddFailFastRequest(typeof(Startup));
 
             services.AddCors();
+            
+            services.AddAuth(configure => configure.SetOptions(options =>
+            {
+                options.AuthServerUrl = Configuration.GetValue<string>("IdentityServer_ApiUrl");
+                options.AuthServerId = Configuration.GetValue<string>("IdentityServer_AuthServerId");
+                options.Audience = Configuration.GetValue<string>("IdentityServer_Audience");
+
+                var allowedOrigins = Configuration.GetValue<string>("IdentityServer_AllowedOrigins");
+                if (!string.IsNullOrWhiteSpace(allowedOrigins))
+                    options.AllowedOrigins = allowedOrigins.Split(";").ToList();
+            }));
 
             services.AddControllers().AddJsonOptions(options =>
             {

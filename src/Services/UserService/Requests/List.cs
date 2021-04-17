@@ -1,10 +1,12 @@
 ﻿namespace Identity.Api.Services.UserService.Requests
 {
     using AlbedoTeam.Identity.Contracts.Common;
+    using AlbedoTeam.Sdk.Cache.Attributes;
     using AlbedoTeam.Sdk.FailFast;
     using MediatR;
     using Models;
 
+    [Cache(120)]
     public class List : IRequest<Result<Paged<User>>>
     {
         public string AccountId { get; set; }
