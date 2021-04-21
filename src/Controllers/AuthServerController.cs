@@ -35,9 +35,12 @@
         public async Task<ActionResult<AuthServer>> Get(
             string id,
             [FromQuery] string accountId,
-            [FromQuery] bool showDeleted)
+            [FromQuery] bool showDeleted,
+            [FromHeader(Name = CustomHeaders.NoCache)]
+            bool noCache)
         {
-            var response = await _mediator.Send(new Get {AccountId = accountId, Id = id, ShowDeleted = showDeleted});
+            var response = await _mediator.Send(new Get
+                {NoCache = noCache, AccountId = accountId, Id = id, ShowDeleted = showDeleted});
             return response.HasError
                 ? HandleError(response)
                 : Ok(response.Data);

@@ -31,10 +31,15 @@
         }
 
         [HttpGet("{id:regex(^[[0-9a-fA-F]]{{24}}$)}", Name = "GetUserType")]
-        public async Task<ActionResult<UserType>> Get(string id, [FromQuery] string accountId,
-            [FromQuery] bool showDeleted)
+        public async Task<ActionResult<UserType>> Get(
+            string id,
+            [FromQuery] string accountId,
+            [FromQuery] bool showDeleted,
+            [FromHeader(Name = CustomHeaders.NoCache)]
+            bool noCache)
         {
-            var response = await _mediator.Send(new Get {Id = id, AccountId = accountId, ShowDeleted = showDeleted});
+            var response = await _mediator.Send(new Get
+                {NoCache = noCache, Id = id, AccountId = accountId, ShowDeleted = showDeleted});
             return response.HasError
                 ? HandleError(response)
                 : Ok(response.Data);
