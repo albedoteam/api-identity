@@ -4,11 +4,12 @@
     using AlbedoTeam.Sdk.Cache.Attributes;
     using AlbedoTeam.Sdk.FailFast;
     using AlbedoTeam.Sdk.FailFast.Abstractions;
+    using MediatR;
     using Microsoft.AspNetCore.Mvc;
     using Models;
 
-    [Cache(7200)]
-    public class List : ICachedRequest<Result<Paged<AuthServer>>>
+    // [Cache(7200)]
+    public class List : IRequest<Result<Paged<AuthServer>>>
     {
         [FromQuery]
         public bool ShowDeleted { get; set; }

@@ -4,11 +4,12 @@
     using AlbedoTeam.Sdk.Cache.Attributes;
     using AlbedoTeam.Sdk.FailFast;
     using AlbedoTeam.Sdk.FailFast.Abstractions;
+    using MediatR;
     using Microsoft.AspNetCore.Mvc;
     using Models;
 
-    [Cache(120)]
-    public class List : ICachedRequest<Result<Paged<UserType>>>
+    // [Cache(120)]
+    public class List : IRequest<Result<Paged<UserType>>>
     {
         [FromQuery]
         public string AccountId { get; set; }

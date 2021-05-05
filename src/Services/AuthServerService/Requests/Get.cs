@@ -3,10 +3,11 @@
     using AlbedoTeam.Sdk.Cache.Attributes;
     using AlbedoTeam.Sdk.FailFast;
     using AlbedoTeam.Sdk.FailFast.Abstractions;
+    using MediatR;
     using Models;
 
-    [Cache(120)]
-    public class Get : ICachedRequest<Result<AuthServer>>
+    // [Cache(120)]
+    public class Get : IRequest<Result<AuthServer>>
     {
         public string AccountId { get; set; }
         public string Id { get; set; }
