@@ -1,8 +1,6 @@
 ﻿namespace Identity.Api.Services.PasswordRecoveryService.Requests
 {
-    using AlbedoTeam.Sdk.Cache.Attributes;
     using AlbedoTeam.Sdk.FailFast;
-    using AlbedoTeam.Sdk.FailFast.Abstractions;
     using MediatR;
     using Microsoft.AspNetCore.Mvc;
     using Models;

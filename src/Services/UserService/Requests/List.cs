@@ -1,9 +1,7 @@
 ﻿namespace Identity.Api.Services.UserService.Requests
 {
     using AlbedoTeam.Identity.Contracts.Common;
-    using AlbedoTeam.Sdk.Cache.Attributes;
     using AlbedoTeam.Sdk.FailFast;
-    using AlbedoTeam.Sdk.FailFast.Abstractions;
     using MediatR;
     using Microsoft.AspNetCore.Mvc;
     using Models;

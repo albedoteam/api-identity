@@ -1,8 +1,6 @@
 namespace Identity.Api
 {
-    using System.Linq;
     using System.Text.Json.Serialization;
-    using AlbedoTeam.Sdk.Authentication;
     using AlbedoTeam.Sdk.Cache;
     using AlbedoTeam.Sdk.Documentation;
     using AlbedoTeam.Sdk.Documentation.Models;
@@ -90,10 +88,10 @@ namespace Identity.Api
             app.UseGlobalExceptionHandler(loggerFactory);
             app.UseDocumentation();
             // app.UseAuth();
-            
+
             app.UseCors(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseAuthorization();
-            
+
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }

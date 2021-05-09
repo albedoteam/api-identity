@@ -1,8 +1,6 @@
 ﻿namespace Identity.Api.Services.AuthServerService.Requests
 {
-    using AlbedoTeam.Sdk.Cache.Attributes;
     using AlbedoTeam.Sdk.FailFast;
-    using AlbedoTeam.Sdk.FailFast.Abstractions;
     using MediatR;
     using Models;
 
