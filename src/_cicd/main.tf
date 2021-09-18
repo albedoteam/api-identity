@@ -5,10 +5,7 @@ terraform {
       version = ">= 2.0.0"
     }
   }
-  backend "kubernetes" {
-    secret_suffix    = "identity-api"
-    load_config_file = true
-  }
+  backend "kubernetes" {}
 }
 
 provider "kubernetes" {
@@ -17,7 +14,7 @@ provider "kubernetes" {
 
 resource "kubernetes_secret" "identity" {
   metadata {
-    name      = var.project_secrets_name
+    name      = "${var.environment_prefix}${var.project_secrets_name}"
     namespace = var.namespace
   }
   data = {
@@ -35,10 +32,10 @@ resource "kubernetes_secret" "identity" {
 
 resource "kubernetes_deployment" "identity" {
   metadata {
-    name      = var.project_name
+    name      = "${var.environment_prefix}${var.project_name}"
     namespace = var.namespace
     labels = {
-      app = var.project_label
+      app = "${var.environment_prefix}${var.project_label}"
     }
   }
 
@@ -46,13 +43,13 @@ resource "kubernetes_deployment" "identity" {
     replicas = var.project_replicas_count
     selector {
       match_labels = {
-        app = var.project_name
+        app = "${var.environment_prefix}${var.project_name}"
       }
     }
     template {
       metadata {
         labels = {
-          app = var.project_name
+          app = "${var.environment_prefix}${var.project_name}"
         }
       }
       spec {
@@ -61,7 +58,7 @@ resource "kubernetes_deployment" "identity" {
         }
         container {
           image             = "${var.do_registry_name}/${var.project_name}:${var.project_image_tag}"
-          name              = "${var.project_name}-container"
+          name              = "${var.environment_prefix}${var.project_name}-container"
           image_pull_policy = "Always"
           resources {
             limits = {
@@ -83,7 +80,7 @@ resource "kubernetes_deployment" "identity" {
           }
           env_from {
             secret_ref {
-              name = var.project_secrets_name
+              name = "${var.environment_prefix}${var.project_secrets_name}"
             }
           }
         }
@@ -94,17 +91,17 @@ resource "kubernetes_deployment" "identity" {
 
 resource "kubernetes_service" "identity" {
   metadata {
-    name      = var.project_name
+    name      = "${var.environment_prefix}${var.project_name}"
     namespace = var.namespace
     labels = {
-      app = var.project_name
+      app = "${var.environment_prefix}${var.project_name}"
     }
   }
   spec {
     type = "ClusterIP"
     port {
       name        = "http"
-      port        = 5100
+      port        = var.project_service_port
       target_port = 80
       protocol    = "TCP"
     }
