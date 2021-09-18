@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using AlbedoTeam.Sdk.FailFast;
-using Identity.Api.Models;
-using MediatR;
-
-namespace Identity.Api.Services.UserService.Requests
+﻿namespace Identity.Api.Services.UserService.Requests
 {
+    using System.Collections.Generic;
+    using AlbedoTeam.Sdk.FailFast;
+    using MediatR;
+    using Models;
+
     public class Update : IRequest<Result<User>>
     {
         public string AccountId { get; set; }

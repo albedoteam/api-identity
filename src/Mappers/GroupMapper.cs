@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-using AlbedoTeam.Identity.Contracts.Requests;
-using AlbedoTeam.Identity.Contracts.Responses;
-using AutoMapper;
-using Identity.Api.Mappers.Abstractions;
-using Identity.Api.Models;
-using Identity.Api.Services.GroupService.Requests;
-
-namespace Identity.Api.Mappers
+﻿namespace Identity.Api.Mappers
 {
+    using System.Collections.Generic;
+    using Abstractions;
+    using AlbedoTeam.Identity.Contracts.Requests;
+    using AlbedoTeam.Identity.Contracts.Responses;
+    using AutoMapper;
+    using Models;
+    using Services.GroupService.Requests;
+
     public class GroupMapper : IGroupMapper
     {
         private readonly IMapper _mapper;

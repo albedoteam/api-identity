@@ -1,11 +1,12 @@
-﻿using AlbedoTeam.Identity.Contracts.Commands;
-using AlbedoTeam.Identity.Contracts.Requests;
-using AlbedoTeam.Sdk.MessageProducer;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace Identity.Api
+﻿namespace Identity.Api
 {
+    using AlbedoTeam.Identity.Contracts.Commands;
+    using AlbedoTeam.Identity.Contracts.Requests;
+    using AlbedoTeam.Sdk.MessageConsumer.Configuration;
+    using AlbedoTeam.Sdk.MessageProducer;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+
     public static class SetupBroker
     {
         public static IServiceCollection ConfigureBroker(this IServiceCollection services, IConfiguration configuration)
@@ -13,8 +14,25 @@ namespace Identity.Api
             services.AddProducer(
                 configure =>
                 {
-                    configure
-                        .SetBrokerOptions(broker => broker.Host = configuration.GetValue<string>("Broker_Host"));
+                    configure.SetBrokerOptions(broker =>
+                    {
+                        broker.HostOptions = new HostOptions
+                        {
+                            Host = configuration.GetValue<string>("Broker_Host"),
+                            HeartbeatInterval = 10,
+                            RequestedChannelMax = 40,
+                            RequestedConnectionTimeout = 60000
+                        };
+
+                        broker.KillSwitchOptions = new KillSwitchOptions
+                        {
+                            ActivationThreshold = 10,
+                            TripThreshold = 0.15,
+                            RestartTimeout = 60
+                        };
+
+                        broker.PrefetchCount = 1;
+                    });
                 },
                 consumers =>
                 {
@@ -42,7 +60,12 @@ namespace Identity.Api
                         .Map<ClearUserSessions>()
                         .Map<AddGroupToUser>()
                         .Map<RemoveGroupFromUser>()
-                        .Map<ChangeUserTypeOnUser>();
+                        .Map<ChangeUserTypeOnUser>()
+                        .Map<ResendFirstAccessEmail>();
+
+                    // pwd recovery commands
+                    queues
+                        .Map<CreatePasswordRecovery>();
                 },
                 clients =>
                 {
@@ -51,6 +74,7 @@ namespace Identity.Api
                         .Add<ListAuthServers>()
                         .Add<GetAuthServer>()
                         .Add<CreateAuthServer>()
+                        .Add<UpdateAuthServer>()
                         .Add<DeleteAuthServer>();
 
                     // group
@@ -76,6 +100,10 @@ namespace Identity.Api
                         .Add<CreateUser>()
                         .Add<UpdateUser>()
                         .Add<DeleteUser>();
+
+                    // pwd recovery
+                    clients
+                        .Add<GetPasswordRecovery>();
                 });
 
             return services;

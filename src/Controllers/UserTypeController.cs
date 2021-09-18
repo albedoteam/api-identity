@@ -1,15 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using AlbedoTeam.Sdk.FailFast;
-using Identity.Api.Models;
-using Identity.Api.Services.UserTypeService.Requests;
-using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using NSwag.Annotations;
-
-namespace Identity.Api.Controllers
+﻿namespace Identity.Api.Controllers
 {
+    using System.Threading.Tasks;
+    using AlbedoTeam.Sdk.FailFast;
+    using MediatR;
+    using Microsoft.AspNetCore.Mvc;
+    using Models;
+    using NSwag.Annotations;
+    using Services.UserTypeService.Requests;
+
     [ApiController]
     [Route("v{version:apiVersion}/[controller]")]
     [ApiVersion("1")]
@@ -24,10 +22,6 @@ namespace Identity.Api.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(Paged<UserType>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Paged<UserType>>> List([FromQuery] List request)
         {
             var response = await _mediator.Send(request);
@@ -37,24 +31,21 @@ namespace Identity.Api.Controllers
         }
 
         [HttpGet("{id:regex(^[[0-9a-fA-F]]{{24}}$)}", Name = "GetUserType")]
-        [ProducesResponseType(typeof(UserType), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<UserType>> Get(string id, [FromQuery] bool showDeleted)
+        public async Task<ActionResult<UserType>> Get(
+            string id,
+            [FromQuery] string accountId,
+            [FromQuery] bool showDeleted,
+            [FromHeader(Name = CustomHeaders.NoCache)]
+            bool noCache)
         {
-            var response = await _mediator.Send(new Get {Id = id, ShowDeleted = showDeleted});
+            var response = await _mediator.Send(new Get
+                {NoCache = noCache, Id = id, AccountId = accountId, ShowDeleted = showDeleted});
             return response.HasError
                 ? HandleError(response)
                 : Ok(response.Data);
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(UserType), StatusCodes.Status201Created)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status409Conflict)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<UserType>> Post(Create request)
         {
             var response = await _mediator.Send(request);
@@ -64,10 +55,6 @@ namespace Identity.Api.Controllers
         }
 
         [HttpPut("{id:regex(^[[0-9a-fA-F]]{{24}}$)}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Put(string id, Update request)
         {
             if (id != request.Id)
@@ -80,23 +67,15 @@ namespace Identity.Api.Controllers
         }
 
         [HttpDelete("{id:regex(^[[0-9a-fA-F]]{{24}}$)}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(string id, [FromQuery] string accountId)
         {
-            var response = await _mediator.Send(new Delete {Id = id});
+            var response = await _mediator.Send(new Delete {Id = id, AccountId = accountId});
             return response.HasError
                 ? HandleError(response)
                 : NoContent();
         }
 
         [HttpPatch("{id:regex(^[[0-9a-fA-F]]{{24}}$)}/addGroup")]
-        [ProducesResponseType(StatusCodes.Status202Accepted)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> AddGroup(string id, AddGroup request)
         {
             if (id != request.UserTypeId)
@@ -110,11 +89,7 @@ namespace Identity.Api.Controllers
             return Accepted();
         }
 
-        [HttpDelete("{id:regex(^[[0-9a-fA-F]]{{24}}$)}/removeGroup")]
-        [ProducesResponseType(StatusCodes.Status202Accepted)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status500InternalServerError)]
+        [HttpPatch("{id:regex(^[[0-9a-fA-F]]{{24}}$)}/removeGroup")]
         public async Task<IActionResult> RemoveGroup(string id, RemoveGroup request)
         {
             if (id != request.UserTypeId)

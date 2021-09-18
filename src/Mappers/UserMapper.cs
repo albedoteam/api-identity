@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
-using AlbedoTeam.Identity.Contracts.Commands;
-using AlbedoTeam.Identity.Contracts.Requests;
-using AlbedoTeam.Identity.Contracts.Responses;
-using AutoMapper;
-using Identity.Api.Mappers.Abstractions;
-using Identity.Api.Models;
-using Identity.Api.Services.UserService.Requests;
-
-namespace Identity.Api.Mappers
+﻿namespace Identity.Api.Mappers
 {
+    using System.Collections.Generic;
+    using Abstractions;
+    using AlbedoTeam.Identity.Contracts.Commands;
+    using AlbedoTeam.Identity.Contracts.Requests;
+    using AlbedoTeam.Identity.Contracts.Responses;
+    using AutoMapper;
+    using Models;
+    using Services.UserService.Requests;
+
     public class UserMapper : IUserMapper
     {
         private readonly IMapper _mapper;
@@ -37,6 +37,7 @@ namespace Identity.Api.Mappers
                 cfg.CreateMap<AddGroup, AddGroupToUser>().ReverseMap();
                 cfg.CreateMap<RemoveGroup, RemoveGroupFromUser>().ReverseMap();
                 cfg.CreateMap<ChangeUserType, ChangeUserTypeOnUser>().ReverseMap();
+                cfg.CreateMap<ResendInvite, ResendFirstAccessEmail>().ReverseMap();
             });
 
             _mapper = config.CreateMapper();
@@ -120,6 +121,11 @@ namespace Identity.Api.Mappers
         public ChangeUserTypeOnUser MapRequestToCommand(ChangeUserType request)
         {
             return _mapper.Map<ChangeUserType, ChangeUserTypeOnUser>(request);
+        }
+
+        public ResendFirstAccessEmail MapRequestToCommand(ResendInvite request)
+        {
+            return _mapper.Map<ResendInvite, ResendFirstAccessEmail>(request);
         }
     }
 }

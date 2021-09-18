@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using AlbedoTeam.Identity.Contracts.Requests;
-using AlbedoTeam.Identity.Contracts.Responses;
-using Identity.Api.Models;
-using Identity.Api.Services.GroupService.Requests;
-
-namespace Identity.Api.Mappers.Abstractions
+﻿namespace Identity.Api.Mappers.Abstractions
 {
+    using System.Collections.Generic;
+    using AlbedoTeam.Identity.Contracts.Requests;
+    using AlbedoTeam.Identity.Contracts.Responses;
+    using Models;
+    using Services.GroupService.Requests;
+
     public interface IGroupMapper
     {
         // Broker to Model

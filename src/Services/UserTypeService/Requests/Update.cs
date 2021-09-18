@@ -1,11 +1,9 @@
-﻿using AlbedoTeam.Identity.Contracts.Common;
-using AlbedoTeam.Identity.Contracts.Requests;
-using AlbedoTeam.Sdk.FailFast;
-using Identity.Api.Models;
-using MediatR;
-
-namespace Identity.Api.Services.UserTypeService.Requests
+﻿namespace Identity.Api.Services.UserTypeService.Requests
 {
+    using AlbedoTeam.Sdk.FailFast;
+    using MediatR;
+    using Models;
+
     public class Update : IRequest<Result<UserType>>
     {
         public string AccountId { get; set; }

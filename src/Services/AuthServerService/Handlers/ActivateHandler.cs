@@ -1,14 +1,14 @@
-﻿using System.Threading.Tasks;
-using AlbedoTeam.Identity.Contracts.Commands;
-using AlbedoTeam.Sdk.FailFast;
-using AlbedoTeam.Sdk.FailFast.Abstractions;
-using AlbedoTeam.Sdk.MessageProducer.Services.Abstractions;
-using Identity.Api.Mappers.Abstractions;
-using Identity.Api.Models;
-using Identity.Api.Services.AuthServerService.Requests;
-
-namespace Identity.Api.Services.AuthServerService.Handlers
+﻿namespace Identity.Api.Services.AuthServerService.Handlers
 {
+    using System.Threading.Tasks;
+    using AlbedoTeam.Identity.Contracts.Commands;
+    using AlbedoTeam.Sdk.FailFast;
+    using AlbedoTeam.Sdk.FailFast.Abstractions;
+    using AlbedoTeam.Sdk.MessageProducer.Services.Abstractions;
+    using Mappers.Abstractions;
+    using Models;
+    using Requests;
+
     public class ActivateHandler : CommandHandler<Activate, AuthServer>
     {
         private readonly IAuthServerMapper _mapper;
