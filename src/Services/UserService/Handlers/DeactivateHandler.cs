@@ -1,14 +1,14 @@
-﻿using System.Threading.Tasks;
-using AlbedoTeam.Identity.Contracts.Commands;
-using AlbedoTeam.Sdk.FailFast;
-using AlbedoTeam.Sdk.FailFast.Abstractions;
-using AlbedoTeam.Sdk.MessageProducer.Services.Abstractions;
-using Identity.Api.Mappers.Abstractions;
-using Identity.Api.Models;
-using Identity.Api.Services.UserService.Requests;
-
-namespace Identity.Api.Services.UserService.Handlers
+﻿namespace Identity.Api.Services.UserService.Handlers
 {
+    using System.Threading.Tasks;
+    using AlbedoTeam.Identity.Contracts.Commands;
+    using AlbedoTeam.Sdk.FailFast;
+    using AlbedoTeam.Sdk.FailFast.Abstractions;
+    using AlbedoTeam.Sdk.MessageProducer.Services.Abstractions;
+    using Mappers.Abstractions;
+    using Models;
+    using Requests;
+
     public class DeactivateHandler : CommandHandler<Deactivate, User>
     {
         private readonly IUserMapper _mapper;

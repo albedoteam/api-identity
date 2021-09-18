@@ -1,9 +1,9 @@
-using System;
-using System.Collections.Generic;
-using AlbedoTeam.Identity.Contracts.Common;
-
 namespace Identity.Api.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using AlbedoTeam.Identity.Contracts.Common;
+
     public class AuthServer
     {
         public string Id { get; set; }
@@ -18,6 +18,8 @@ namespace Identity.Api.Models
         public List<string> BasicScopes { get; set; }
         public bool Active { get; set; }
         public Provider Provider { get; set; }
+        public string ProviderId { get; set; }
+        public CommunicationRules CommunicationRules { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public bool IsDeleted { get; set; }

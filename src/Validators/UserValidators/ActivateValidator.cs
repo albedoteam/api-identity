@@ -1,9 +1,9 @@
-﻿using System.Text.RegularExpressions;
-using FluentValidation;
-using Identity.Api.Services.UserService.Requests;
-
-namespace Identity.Api.Validators.UserValidators
+﻿namespace Identity.Api.Validators.UserValidators
 {
+    using System.Text.RegularExpressions;
+    using FluentValidation;
+    using Services.UserService.Requests;
+
     public class ActivateValidator : AbstractValidator<Activate>
     {
         public ActivateValidator()

@@ -1,19 +1,20 @@
-using System.Text.Json.Serialization;
-using AlbedoTeam.Sdk.Documentation;
-using AlbedoTeam.Sdk.Documentation.Models;
-using AlbedoTeam.Sdk.ExceptionHandler;
-using AlbedoTeam.Sdk.FailFast;
-using AlbedoTeam.Sdk.Validations;
-using Identity.Api.Mappers;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-
 namespace Identity.Api
 {
+    using System.Text.Json.Serialization;
+    using AlbedoTeam.Sdk.Cache;
+    using AlbedoTeam.Sdk.Documentation;
+    using AlbedoTeam.Sdk.Documentation.Models;
+    using AlbedoTeam.Sdk.ExceptionHandler;
+    using AlbedoTeam.Sdk.FailFast;
+    using AlbedoTeam.Sdk.Validations;
+    using Mappers;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+    using Microsoft.Extensions.Logging;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -29,7 +30,7 @@ namespace Identity.Api
             services.AddDocumentation(apiDocument =>
             {
                 apiDocument.Title = "Identity Domain API";
-                apiDocument.Description = "codiname: Pandora's Actor";
+                apiDocument.Description = "codiname: Pandora's Actor :)";
                 apiDocument.Contact = new ApiContact
                 {
                     Name = "Albedo Team",
@@ -43,11 +44,31 @@ namespace Identity.Api
             });
 
             services.ConfigureBroker(Configuration);
+
+            services.AddCache(configure => configure.SetOptions(options =>
+            {
+                options.Host = Configuration.GetValue<string>("Cache_Host");
+                options.Port = Configuration.GetValue<int>("Cache_Port");
+                options.Password = Configuration.GetValue<string>("Cache_Secret");
+                options.InstanceName = Configuration.GetValue<string>("Cache_InstanceName");
+            }));
+
             services.AddMappers();
             services.AddValidators(GetType().Assembly.FullName);
             services.AddFailFastRequest(typeof(Startup));
 
             services.AddCors();
+
+            // services.AddAuth(configure => configure.SetOptions(options =>
+            // {
+            //     options.AuthServerUrl = Configuration.GetValue<string>("IdentityServer_ApiUrl");
+            //     options.AuthServerId = Configuration.GetValue<string>("IdentityServer_AuthServerId");
+            //     options.Audience = Configuration.GetValue<string>("IdentityServer_Audience");
+            //
+            //     var allowedOrigins = Configuration.GetValue<string>("IdentityServer_AllowedOrigins");
+            //     if (!string.IsNullOrWhiteSpace(allowedOrigins))
+            //         options.AllowedOrigins = allowedOrigins.Split(";").ToList();
+            // }));
 
             services.AddControllers().AddJsonOptions(options =>
             {
@@ -65,8 +86,10 @@ namespace Identity.Api
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseGlobalExceptionHandler(loggerFactory);
-            app.UseCors(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseDocumentation();
+            // app.UseAuth();
+
+            app.UseCors(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });

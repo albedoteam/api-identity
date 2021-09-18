@@ -1,4 +1,4 @@
-﻿// main/common variables
+// main/common variables
 
 variable "namespace" {
   description = "Albedo Team product's namespace"
@@ -40,18 +40,77 @@ variable "project_image_tag" {
 variable "project_replicas_count" {
   description = "Number of container replicas to provision."
   type        = number
-  default     = 1
 }
 
 variable "project_service_port" {
   description = "Internal service port"
   type        = number
-  default     = 5100
+}
+
+variable "environment_prefix" {
+  description = "Host environment to naming pattern"
+  type        = string
 }
 
 // project settings variables
 variable "settings_broker_connection_string" {
   description = "Broker Connection String"
+  type        = string
+  sensitive   = true
+  default     = ""
+}
+
+variable "settings_cache_host" {
+  description = "Cache Host"
+  type        = string
+  sensitive   = true
+  default     = ""
+}
+
+variable "settings_cache_port" {
+  description = "Cache Port"
+  type        = number
+  sensitive   = true
+  default     = 0
+}
+
+variable "settings_cache_secret" {
+  description = "Cache Secret"
+  type        = string
+  sensitive   = true
+  default     = ""
+}
+
+variable "settings_cache_instance_name" {
+  description = "Cache Instance Name"
+  type        = string
+  sensitive   = true
+  default     = ""
+}
+
+variable "settings_identity_server_api_url" {
+  description = "Identity Server API Url"
+  type        = string
+  sensitive   = true
+  default     = ""
+}
+
+variable "settings_identity_server_auth_server_id" {
+  description = "Identity Server AuthServerId"
+  type        = string
+  sensitive   = true
+  default     = ""
+}
+
+variable "settings_identity_server_audience" {
+  description = "Identity Server Audience"
+  type        = string
+  sensitive   = true
+  default     = ""
+}
+
+variable "settings_identity_server_allowed_origins" {
+  description = "Identity Server Allowed Origins"
   type        = string
   sensitive   = true
   default     = ""

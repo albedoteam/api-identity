@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using AlbedoTeam.Identity.Contracts.Common;
-
-namespace Identity.Api.Models
+﻿namespace Identity.Api.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using AlbedoTeam.Identity.Contracts.Common;
+
     public class User
     {
         public string Id { get; set; }
@@ -17,6 +17,8 @@ namespace Identity.Api.Models
         public Dictionary<string, string> CustomProfileFields { get; set; }
         public List<string> Groups { get; set; }
         public Provider Provider { get; set; }
+        public string ProviderId { get; set; }
+        public string UsernameAtProvider { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public bool IsDeleted { get; set; }

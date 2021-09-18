@@ -1,9 +1,9 @@
-﻿using System.Text.RegularExpressions;
-using FluentValidation;
-using Identity.Api.Services.GroupService.Requests;
-
-namespace Identity.Api.Validators.GroupValidators
+﻿namespace Identity.Api.Validators.GroupValidators
 {
+    using System.Text.RegularExpressions;
+    using FluentValidation;
+    using Services.GroupService.Requests;
+
     public class UpdateValidator : AbstractValidator<Update>
     {
         public UpdateValidator()

@@ -1,9 +1,9 @@
-﻿using System.Text.RegularExpressions;
-using FluentValidation;
-using Identity.Api.Services.UserTypeService.Requests;
-
-namespace Identity.Api.Validators.UserTypeValidators
+﻿namespace Identity.Api.Validators.UserTypeValidators
 {
+    using System.Text.RegularExpressions;
+    using FluentValidation;
+    using Services.UserTypeService.Requests;
+
     public class RemoveGroupValidator : AbstractValidator<RemoveGroup>
     {
         public RemoveGroupValidator()
